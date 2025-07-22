@@ -1,0 +1,56 @@
+[System]
+Name='gait_fis'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=7
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='StrideLength'
+Range=[0 10]
+NumMFs=5
+MF1='VeryShort':'trapmf',[0 0 1 2]
+MF2='Short':'trimf',[1 2 4]
+MF3='Medium':'trimf',[3 5 6]
+MF4='Long':'trimf',[5 7 8]
+MF5='VeryLong':'trapmf',[7.5 8.5 10 10]
+
+[Input2]
+Name='StepSymmetry'
+Range=[0 100]
+NumMFs=4
+MF1='Poor':'trimf',[0 10 25]
+MF2='Fair':'trimf',[25 37.5 50]
+MF3='Good':'trimf',[50 62.5 75]
+MF4='VeryGood':'trimf',[75 90 100]
+
+[Input3]
+Name='JointAngles'
+Range=[0 90]
+NumMFs=3
+MF1='Low':'trimf',[0 15 30]
+MF2='Medium':'trimf',[30 45 60]
+MF3='High':'trimf',[60 75 90]
+
+[Output1]
+Name='GaitPattern'
+Range=[0 100]
+NumMFs=3
+MF1='Limping':'trapmf',[0 0 30 45]
+MF2='Shuffling':'trimf',[40 55 70]
+MF3='Normal':'trapmf',[65 80 100 100]
+
+[Rules]
+1 1 1, 1 (1) : 1
+2 2 1, 2 (1) : 1
+3 3 2, 3 (1) : 1
+4 3 3, 3 (1) : 1
+2 1 2, 1 (1) : 1
+4 2 2, 2 (1) : 1
+5 4 3, 3 (1) : 1

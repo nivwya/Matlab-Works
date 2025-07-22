@@ -1,0 +1,41 @@
+[System]
+Name='tipper'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=3
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='FoodQuality'
+Range=[0 10]
+NumMFs=3
+MF1='bad':'trimf',[0 0 5]
+MF2='average':'trimf',[0 5 10]
+MF3='excellent':'trimf',[5 10 10]
+
+[Input2]
+Name='Service'
+Range=[0 10]
+NumMFs=3
+MF1='poor':'trimf',[0 0 5]
+MF2='good':'trimf',[0 5 10]
+MF3='excellent':'trimf',[5 10 10]
+
+[Output1]
+Name='Tip'
+Range=[0 30]
+NumMFs=3
+MF1='low':'trimf',[0 0 15]
+MF2='medium':'trimf',[10 15 20]
+MF3='high':'trimf',[15 30 30]
+
+[Rules]
+1 1, 1 (1) : 1
+2 2, 2 (1) : 1
+3 3, 3 (1) : 1
